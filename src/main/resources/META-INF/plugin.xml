@@ -25,6 +25,11 @@
     ]]></description>
 
     <change-notes><![CDATA[
+        <h3>2.4</h3>
+        <ul>
+            <li><strong>(Feature)</strong> Add support of Lexer based highlighting, which is used in Rider to highlight C++ files.</li>
+            <li><strong>(Feature)</strong> Add support for java tokens highlighting (null, true, false).</li>
+        </ul>
         <h3>2.3.2</h3>
         <ul>
             <li><strong>(Bug Fix)</strong> Fix comment highlighting for tokens, which contains other tokens.</li>

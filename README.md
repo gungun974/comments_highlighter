@@ -31,12 +31,12 @@ General architecture is simple and has 2 main parts:
 + Annotators:
   + **AbstractCommentHighlighterAnnotator**
     abstract [Annotator](https://www.jetbrains.org/intellij/sdk/docs/reference_guide/custom_language_support/syntax_highlighting_and_error_highlighting.html#annotator)
-    to highlight comments
+    to highlight comments defined in Intellij AST.
     + **GenericCommentHighlighterAnnotator** highlights PsiComment type. In such way plugin is able to handle any
       language, supported by Intellij IDEA.
   + **AbstractKeywordHighlighterAnnotator**
     abstract [Annotator](https://www.jetbrains.org/intellij/sdk/docs/reference_guide/custom_language_support/syntax_highlighting_and_error_highlighting.html#annotator)
-    to highlight keywords.
+    to highlight keywords defined in Intellij AST.
     + Each language requires specific implementation of _isKeywordElement_ and _isMethodAccessModifierKeyword_.
     + _findClassByName_ is used instead of _instanceof_ comparing to be able to compile plugin on any type of IDE(
       PyCharm,Rider etc).
@@ -45,11 +45,21 @@ General architecture is simple and has 2 main parts:
       + **KotlinKeywordHighlighterAnnotator**
       + **CKeywordHighlighterAnnotator**
       + **CSharpKeywordHighlighterAnnotator**
+      + **PHPKeywordHighlighterAnnotator**
+  + **AbstractLexerPostProcessingHighlighterAnnotator**
+    abstract [Annotator](https://www.jetbrains.org/intellij/sdk/docs/reference_guide/custom_language_support/syntax_highlighting_and_error_highlighting.html#annotator)
+    to highlight both comments and keywords defined in Lexer segments. Used for files, which have only lexer highlighting, for example C++ files in Rider.
+    + **CPPLexerPostProcessingHighlighterAnnotator** highlights CppElementType comment and keyword tokens in CPPFile type.
 + Highlighters:
   + **CommentHighlighter** main class to define, what part of comment must be highlighted.
   + **KeywordHighlighter** main class to define, what keywords must be highlighted.
 
 ## Version history
+
+### 2.4
+
++ **(Feature)** Add support of Lexer based highlighting, which is used in Rider to highlight C++ files.
++ **(Feature)** Add support for java tokens highlighting (null, true, false).
 
 ### 2.3.2
 
